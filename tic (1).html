@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cyberpunk Tic Tac Toe</title>
+  <link rel="stylesheet" href="tic (1).css">
+</head>
+<body>
+  <div class="game-wrapper">
+    <!-- Scoreboard -->
+    <table id="scoreboard">
+      <tr>
+        <td>Player X</td>
+        <td class="score" id="player1">0</td>
+        <td style="padding:0 8px">—</td>
+        <td>Player O</td>
+        <td class="score" id="player2">0</td>
+      </tr>
+    </table>
+
+    <!-- Game board placeholder -->
+    <div id="placeholder"></div>
+
+    <!-- Restart button -->
+    <div style="margin-top:12px">
+      <button onclick="restart()">Restart</button>
+    </div>
+  </div>
+
+  <!-- Win popup -->
+  <div id="win-popup">
+    <div id="win-popup-content"></div>
+  </div>
+
+  <script src="tic (1).js"></script>
+</body>
+</html>

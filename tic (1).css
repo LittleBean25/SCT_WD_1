@@ -1,0 +1,218 @@
+@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap");
+
+body {
+  font-family: "Orbitron", sans-serif;
+  text-align: center;
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  background: black;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Moving cyberpunk neon grid background */
+body::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 200%;
+  width: 200%;
+  background:
+    linear-gradient(#0ff 1px, transparent 1px),
+    linear-gradient(90deg, #0ff 1px, transparent 1px);
+  background-size: 50px 50px;
+  animation: gridMove 10s linear infinite;
+  opacity: 0.15;
+  z-index: 0;
+}
+/* Big background text */
+body::after {
+  content: "TIC   TAC   TOE";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 15vw;
+  font-weight: bold;
+  color: #0ff;
+  opacity: 1;
+  text-shadow:
+    0 0 10px #0ff,
+    0 0 20px #0ff,
+    0 0 40px #0ff,
+    0 0 80px #0ff;
+  animation: glowMove 6s ease-in-out infinite alternate;
+  white-space: nowrap;
+  z-index: 0;
+}
+
+/* Pulse animation when winner found */
+body.pulse-bg::after {
+  animation: pulseText 0.8s ease-in-out 3;
+}
+
+@keyframes pulseText {
+  0% { opacity: 0.05; transform: translate(-50%, -50%) scale(1); }
+  50% { opacity: 0.15; transform: translate(-50%, -50%) scale(1.05); }
+  100% { opacity: 0.05; transform: translate(-50%, -50%) scale(1); }
+}
+
+/* Win popup styling */
+#win-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+#win-popup-content {
+  background: rgba(0, 255, 255, 0.1);
+  padding: 30px 50px;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #0ff;
+  border-radius: 12px;
+  box-shadow: 0 0 20px #0ff, 0 0 40px #0ff inset;
+  text-shadow: 0 0 10px #0ff, 0 0 20px #0ff;
+  animation: fadeInScale 0.4s ease forwards;
+}
+
+@keyframes fadeInScale {
+  from { transform: scale(0.8); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+@keyframes gridMove {
+  0% { transform: translate(0, 0); }
+  100% { transform: translate(-50px, -50px); }
+}
+
+@keyframes glowMove {
+  0% { transform: translate(-50%, -50%) scale(1); opacity: 0.05; }
+  100% { transform: translate(-50%, -50%) scale(1.05); opacity: 0.08; }
+}
+
+.game-wrapper {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+}
+
+/* Scoreboard */
+#scoreboard {
+  background: rgba(0, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 10px 20px;
+  box-shadow: 0 0 25px #0ff;
+  margin-bottom: 15px;
+}
+
+#scoreboard td {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+#scoreboard .score {
+  font-size: 28px;
+}
+
+#scoreboard .score#player1 {
+  color: #ff00ff;
+  text-shadow: 0 0 10px #ff00ff;
+}
+
+#scoreboard .score#player2 {
+  color: #00ffff;
+  text-shadow: 0 0 10px #00ffff;
+}
+
+/* Board */
+#tic-tac-toe {
+  border-spacing: 0;
+  border-collapse: collapse;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  box-shadow: 0 0 40px #0ff;
+}
+
+#tic-tac-toe td {
+  border: 2px solid rgba(0, 255, 255, 0.3);
+  height: 90px;
+  width: 90px;
+  text-align: center;
+  font: bold 48px "Orbitron", sans-serif;
+  color: #fff;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+#tic-tac-toe td:hover {
+  background: rgba(0, 255, 255, 0.1);
+  transform: scale(1.05);
+}
+
+/* Marks */
+#tic-tac-toe td.X {
+  color: #ff00ff;
+  text-shadow: 0 0 15px #ff00ff, 0 0 30px #ff00ff;
+}
+
+#tic-tac-toe td.O {
+  color: #00ffff;
+  text-shadow: 0 0 15px #00ffff, 0 0 30px #00ffff;
+}
+
+/* Buttons */
+button {
+  background: linear-gradient(135deg, #ff00ff, #ff0099);
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 0 15px #ff00ff;
+}
+
+button:hover {
+  box-shadow: 0 0 20px #ff00ff;
+  transform: scale(1.05);
+}
+
+#popup-message {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.8);
+  background: rgba(0, 255, 255, 0.1);
+  backdrop-filter: blur(6px);
+  color: #fff;
+  font-size: 2rem;
+  font-weight: bold;
+  padding: 20px 40px;
+  border-radius: 12px;
+  box-shadow: 0 0 20px #0ff, 0 0 40px #0ff inset;
+  text-shadow: 0 0 10px #0ff, 0 0 20px #0ff;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  z-index: 999;
+}
+
+#popup-message.show {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
